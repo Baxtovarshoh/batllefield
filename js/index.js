@@ -35,10 +35,19 @@ function updateSlider() {
     item.classList.toggle("active", index === currentIndex)
   );
   if (currentIndex === 1) {
+    console.log(true);
+    auto()
+    
     video.pause();
-  } else {
-    video.play();
+  } else if(currentIndex === 2) {
+    video.pause()
+    console.log(2);
+    clearInterval(autoPlayInterval)
+    
+  }else{
+    video.play()
   }
+
 }
 
 function ChangeSlide(delta) {
@@ -57,7 +66,6 @@ link.forEach((item) =>
 );
 sliderContainer.addEventListener("touchstart", (event) => {
   lastTouchY = event.touches[0].clientY;
-  console.log(event.touches[0].clientY);
 });
 
 sliderContainer.addEventListener("touchmove", (event) => {
@@ -101,10 +109,8 @@ function nextSlide() {
       -currentIndexAvatar * avatarHeight
     }px)`;
   }
-  updateDots();
 }
 next.addEventListener("click", () => {
-  state = true;
   nextSlide();
   op()
 });
@@ -137,15 +143,18 @@ video.addEventListener("ended", () => {
   }
 
   clearInterval(autoPlayInterval);
-  autoPlayInterval = setInterval(() => {
+  auto()
+});
+function auto() {
+   autoPlayInterval = setInterval(() => {
     nextSlide();
     op()
     avatarChange();
     if (currentIndexAvatar >= avatarSlide.length - 1) {
       clearInterval(autoPlayInterval);
     }
-  }, 4000);
-});
+  }, 4000)
+}
 function op() {
   if (currentIndexAvatar === 0) {
     prev.classList.add("disable");
@@ -170,13 +179,11 @@ function mute() {
   const vol = document.querySelector(".volume");
   if (isMuted) {
     video.muted = false;
-    isMuted = true;
+    isMuted = false;
     vol.innerHTML = `<i class="bi bi-volume-up-fill"></i>`;
-    console.log("muted");
   } else {
     video.muted = true;
-    isMuted = false;
+    isMuted = true;
     vol.innerHTML = `<i class="bi bi-volume-mute-fill"></i>`;
-    console.log("unmuted");
   }
 }
