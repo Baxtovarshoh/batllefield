@@ -36,18 +36,21 @@ function updateSlider() {
   );
   if (currentIndex === 1) {
     console.log(true);
-    auto()
-    
+    auto();
+    currentIndexAvatar = 0;
+    avatarChange();
     video.pause();
-  } else if(currentIndex === 2) {
-    video.pause()
+  } else if (currentIndex === 2) {
+    video.pause();
     console.log(2);
-    clearInterval(autoPlayInterval)
-    
-  }else{
-    video.play()
+    clearInterval(autoPlayInterval);
+    currentIndexAvatar = 0;
+    avatarChange();
+  } else {
+    video.play();
+    currentIndexAvatar = 0;
+    avatarChange();
   }
-
 }
 
 function ChangeSlide(delta) {
@@ -84,7 +87,7 @@ sliderContainer.addEventListener("wheel", (event) => {
   ) {
     ChangeSlide(event.deltaY > 0 ? 1 : -1);
   }
-  op()
+  op();
 });
 
 back.addEventListener("click", () => {
@@ -112,7 +115,7 @@ function nextSlide() {
 }
 next.addEventListener("click", () => {
   nextSlide();
-  op()
+  op();
 });
 
 function prevSlide() {
@@ -123,8 +126,7 @@ function prevSlide() {
 }
 prev.addEventListener("click", () => {
   prevSlide();
-  op()
-
+  op();
 });
 
 function goToSlide(index) {
@@ -143,17 +145,17 @@ video.addEventListener("ended", () => {
   }
 
   clearInterval(autoPlayInterval);
-  auto()
+  auto();
 });
 function auto() {
-   autoPlayInterval = setInterval(() => {
+  autoPlayInterval = setInterval(() => {
     nextSlide();
-    op()
+    op();
     avatarChange();
     if (currentIndexAvatar >= avatarSlide.length - 1) {
       clearInterval(autoPlayInterval);
     }
-  }, 4000)
+  }, 4000);
 }
 function op() {
   if (currentIndexAvatar === 0) {
